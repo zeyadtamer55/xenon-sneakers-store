@@ -3,12 +3,18 @@ import React from 'react'
 import { animations } from '../../animate'
 import pages from '../../data/pages'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeShowMenuStatus } from '../../Stores/MenuSlice'
 
 
 const Menu = () => {
     
     const showMenu = useSelector(state => state.showMenu)
+    const dispatch = useDispatch()
+
+    const closeMenu = () => {
+        dispatch(changeShowMenuStatus())
+    }
 
     return (
         <AnimatePresence>
@@ -31,7 +37,7 @@ const Menu = () => {
                         {
                             pages.map(page => (
                                 <li className='flex-1 flex uppercase items-center w-full text-3xl' key={page.name}>
-                                    <Link to={page.href}>{page.name}</Link>
+                                    <Link onClick={closeMenu} to={page.href}>{page.name}</Link>
                                 </li>
                             ))
                         }

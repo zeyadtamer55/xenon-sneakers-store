@@ -13,8 +13,8 @@ const Footer = () => {
     }
 
     return (
-        <footer className='bg-main-black font-jost text-white w-full mt-10'>
-            <div className="container grid grid-cols-[repeat(auto-fit,minmax(225px,1fr))]">
+        <footer className='bg-main-black font-jost text-white w-full'>
+            <div className="container grid gap-8 grid-cols-[repeat(auto-fit,minmax(225px,1fr))]">
 
                 <Logo/>
 

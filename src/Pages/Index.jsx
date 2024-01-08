@@ -4,9 +4,8 @@ import Men from "./Men"
 import Register from "./Register"
 import Home from "./Home"
 import Women from "./Women"
-import About from "./About"
+import ProductPage from "./ProductPage"
 
 
 
-
-export { Cart , Contact , Men , Women , Home , Register , About }
+export { Cart , ProductPage , Contact , Men , Women , Home , Register }

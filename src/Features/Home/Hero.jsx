@@ -12,7 +12,7 @@ const Hero = () => {
 
     return (
         
-        <div className='container !pt-[150px] gap-2 h-screen w-full flex md:flex-row flex-col'>
+        <div className='container !pt-[150px] gap-2 min-h-screen w-full flex md:flex-row flex-col'>
 
             <div className='flex-1 justify-center flex flex-col'>
 

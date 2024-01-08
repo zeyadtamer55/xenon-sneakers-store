@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Home , Contact , About , Women , Cart , Register , Men } from "./Pages/Index"
+import { Home , Contact , Women , Cart , ProductPage , Register , Men } from "./Pages/Index"
 import Header from "./Layout/Header/Header"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -13,7 +13,6 @@ function App() {
     useEffect(()=>{
         dispatch(fetchShoes())
     },[])
-    console.log(useSelector(state => state.shoes));
 
 
     return (
@@ -30,12 +29,13 @@ function App() {
 
                     <Route path="/" element={<Home/>}/>
                     <Route path="/contact" element={<Contact/>}/>
-                    <Route path="/about" element={<About/>}/>
                     <Route path="/men" element={<Men/>}/>
                     <Route path="/women" element={<Women/>}/>
                     <Route path="/cart" element={<Cart/>}/>
                     <Route path="/register" element={<Register/>}/>
 
+                    <Route path="/men/:productId" element={<ProductPage/>}/>
+                    <Route path="/women/:productId" element={<ProductPage/>}/>
 
                 </Routes>
             

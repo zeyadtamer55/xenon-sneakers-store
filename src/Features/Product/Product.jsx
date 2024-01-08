@@ -1,37 +1,29 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import "./Product.css"
+import getProductDiscountPercent from '../../utils/getProductDiscountPercent'
+import getProductStarsRate from '../../utils/getProductStarsRate'
+import { useSelector } from 'react-redux'
 
 const Product = ({product}) => {
     
-    const getDiscountPercentage = () => {
-        // discount equation ((Old Price - New Price) / Old Price) * 100
-        const oldPrice = product.oldPrice
-        const currPrice = product.price
-        const discountPercent = Math.trunc(((oldPrice - currPrice) / oldPrice) * 100) 
-        return `${discountPercent}%`
-    }
+    const productsInCart = useSelector(state => state.cart.data)
+    const productFromCart = productsInCart.find(prod => prod.id === product.id)
+    const isProductInCart = Boolean(productFromCart)
 
-    const stars = () => {
-        const stars = "★★★★★"
-        const rate = Math.round(((product.rate / 10) / 2))
-        return stars.slice(0,rate)
-    }
+  
 
     return (
         <Link
-            to={`${product.category.toLowerCase()}/${product.id}`}
-            className='flex product w-full flex-col'
+            to={`/${product.category.toLowerCase()}/${product.id}`}
+            className={`flex product w-full flex-col`}
         >
             
-            <div className='aspect-square  overflow-hidden w-full mb-2 relative'>
+            <div className={`aspect-square  border-transparent ${isProductInCart && "!border-main-purple"} border-2 border-solid rounded-lg overflow-hidden w-full mb-2 relative`}>
                 <img src={product.images[0]} className='w-full block aspect-square rounded-md object-cover' alt="img" />
                 {
                     product.discount && (
                         <span className='absolute bg-opacity-90 top-3 left-3 drop-shadow rounded-md p-1 text-md bg-main-purple text-white '>
-                            {
-                                getDiscountPercentage()
-                            }
+                            {getProductDiscountPercent(product)}
                         </span>
                     )
                 }
@@ -39,24 +31,18 @@ const Product = ({product}) => {
             
             <div className='flex items-center mb-1 justify-between'>
                 <p className='text-xl text-main-purple font-jost font-bold'>
-                    {
-                        product.company                
-                    }
+                    {product.company}
                 </p>
                 
                 <p className='text-md font-jost font-bold'>
                     {
                         product.discount ? (
                             <span className='mr-2 line-through text-gray-500'>
-                                {
-                                    `$${product.oldPrice}`
-                                }
+                                {`$${product.oldPrice}`}
                             </span>
                         ) : ""
                     }
-                    {
-                        `$${product.price}`
-                    }
+                    {`$${product.price}`}
                 </p>
                 
             </div>
@@ -69,7 +55,7 @@ const Product = ({product}) => {
 
             <div className='w-full flex justify-between items-center'>
                 <p className='text-xl font-bold font-jost'>
-                    {stars()}
+                    {getProductStarsRate(product)}
                 </p>
             </div>
         </Link>

@@ -8,10 +8,6 @@ const pages = [
         href:"/contact"
     },
     {
-        name:"about",
-        href:"/about"
-    },
-    {
         name:"men",
         href:"/men"
     },
